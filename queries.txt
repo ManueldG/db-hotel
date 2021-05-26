@@ -1,0 +1,35 @@
+1.Seleziona tutti gli ospiti che sono stati identificati con la carta di identità
+
+SELECT CONCAT(`name`,' ',`lastname`) AS `ospiti` FROM `ospiti` WHERE `document_type` LIKE 'CI' ORDER BY `ospiti`.`name` ASC;
+
+2.Seleziona tutti gli ospiti che sono nati dopo il 1988
+
+SELECT CONCAT( `ospiti`.`name`,' ',`ospiti`.`lastname`) AS `ospiti` FROM `ospiti` WHERE `date_of_birth` >= '1989' ORDER BY `ospiti`.`date_of_birth` ASC ;
+
+3.Seleziona tutti  gli ospiti che hanno più di 20 anni (al momento dell’esecuzione della query)
+
+SELECT CONCAT( `ospiti`.`name`,' ',`ospiti`.`lastname`) AS `ospiti` FROM `ospiti` WHERE `date_of_birth` <= DATE_SUB(NOW(),INTERVAL 20 YEAR) ORDER BY `date_of_birth` DESC;
+
+4.Seleziona tutti gli ospiti il cui nome inizia con la D
+
+SELECT CONCAT( `ospiti`.`name`,' ',`ospiti`.`lastname`) AS `ospiti` FROM `ospiti` WHERE `name` LIKE 'd%'; 
+
+5.Calcola il totale incassato degli ordini accepted
+
+SELECT SUM(`price`) AS `Totale incassato` FROM `pagamenti` WHERE `status` LIKE 'accepted';
+
+6.Qual'è il prezzo massimo pagato?
+
+SELECT `price` AS `Prezzo più alto` FROM `pagamenti` ORDER BY `pagamenti`.`price` DESC LIMIT 1
+
+7.Seleziona gli ospiti riconosciuti con patente e nati nel 1975
+
+SELECT * FROM `ospiti` WHERE (`date_of_birth` BETWEEN '1975-01-01' AND '1975-12-31') AND `document_type` LIKE 'driver license';
+
+8.Quanti paganti sono anche ospiti?
+
+SELECT COUNT(*) AS 'Ospiti paganti' FROM `paganti` WHERE `ospite_id` IS NOT NULL;
+
+9.Quanti posti letto ha l’hotel in totale?
+
+SELECT '' AS `Numero Letti`,MAX(`stanze`.`room_number`) * (MIN(`configurazioni`.`id`)) AS `Minimo` ,MAX(`stanze`.`room_number`)*(MAX(`configurazioni`.`id`)-1) AS `Massimo` FROM `stanze`,`configurazioni`
