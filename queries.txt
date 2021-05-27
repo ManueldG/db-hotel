@@ -32,5 +32,4 @@ SELECT COUNT(*) AS 'Ospiti paganti' FROM `paganti` WHERE `ospite_id` IS NOT NULL
 
 9.Quanti posti letto ha l’hotel in totale?
 
-
 SELECT '' AS `Numero Letti`,MAX(A.`room_number`) * (MIN(B.`id`)) AS `Minimo` ,MAX(A.`room_number`)*(MAX(B.`id`)-1) AS `Massimo` FROM `stanze` A,`configurazioni` B;
